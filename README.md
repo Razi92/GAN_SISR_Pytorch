@@ -1,1 +1,1 @@
-# GAN_SISR_Pytorch
+# GAN_SISR

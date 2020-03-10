@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 
 from tqdm import tqdm
 import pytorch_ssim
-#from data_utils import TrainDatasetFromFolder, ValDatasetFromFolder, display_transform
+# from data_utils import TrainDatasetFromFolder, ValDatasetFromFolder, display_transform
 from loss import GeneratorLoss
 from model import Generator, Discriminator
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     
     results = {'d_loss': [], 'g_loss': [], 'd_score': [], 'g_score': [], 'psnr': [], 'ssim': []}
     
-    # loop over epochs of data
+    # loop over epochs of all data
     for epoch in range(1, NUM_EPOCHS + 1):
       
         # in order
@@ -68,6 +68,7 @@ if __name__ == '__main__':
         netD.train()
         
         for data, target in train_bar:
+          
             g_update_first = True
             batch_size = data.size(0)
             running_results['batch_sizes'] += batch_size

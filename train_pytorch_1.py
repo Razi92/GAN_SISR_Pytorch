@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import pytorch_ssim
 #from data_utils import TrainDatasetFromFolder, ValDatasetFromFolder, display_transform
-#from loss import GeneratorLoss
+from loss import GeneratorLoss
 from model import Generator, Discriminator
 
 
@@ -24,17 +24,21 @@ parser = argparse.ArgumentParser(description='Train Super Resolution Models')
 
 
 if __name__ == '__main__':
+  
+    # arguments parameters
     opt = parser.parse_args()
-    
     CROP_SIZE = opt.crop_size
     UPSCALE_FACTOR = opt.upscale_factor
     NUM_EPOCHS = opt.num_epochs
     
+    # loading edited data
     train_set = TrainDatasetFromFolder('data/DIV2K_train_HR', crop_size=CROP_SIZE, upscale_factor=UPSCALE_FACTOR)
     val_set = ValDatasetFromFolder('data/DIV2K_valid_HR', upscale_factor=UPSCALE_FACTOR)
     train_loader = DataLoader(dataset=train_set, num_workers=4, batch_size=64, shuffle=True)
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
+    
+    # net, loss, optimizer
     netG = Generator(UPSCALE_FACTOR)
     print('# generator parameters:', sum(param.numel() for param in netG.parameters()))
     netD = Discriminator()
@@ -52,12 +56,17 @@ if __name__ == '__main__':
     
     results = {'d_loss': [], 'g_loss': [], 'd_score': [], 'g_score': [], 'psnr': [], 'ssim': []}
     
+    # loop over epochs of data
     for epoch in range(1, NUM_EPOCHS + 1):
+      
+        # in order
         train_bar = tqdm(train_loader)
         running_results = {'batch_sizes': 0, 'd_loss': 0, 'g_loss': 0, 'd_score': 0, 'g_score': 0}
-    
+        
+        # train, ?????
         netG.train()
         netD.train()
+        
         for data, target in train_bar:
             g_update_first = True
             batch_size = data.size(0)

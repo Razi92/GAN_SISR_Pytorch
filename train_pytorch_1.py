@@ -38,7 +38,7 @@ if __name__ == '__main__':
     val_loader = DataLoader(dataset=val_set, num_workers=4, batch_size=1, shuffle=False)
     
     
-    # net, loss, optimizer
+    # net, loss_g, optimizer
     netG = Generator(UPSCALE_FACTOR)
     print('# generator parameters:', sum(param.numel() for param in netG.parameters()))
     netD = Discriminator()
@@ -75,6 +75,7 @@ if __name__ == '__main__':
     
             ############################
             # (1) Update D network: maximize D(x)-1-D(G(z))
+            # img [fake, real], out [fake, real], loss_d
             ###########################
             real_img = Variable(target)
             if torch.cuda.is_available():

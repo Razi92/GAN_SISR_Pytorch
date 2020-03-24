@@ -170,6 +170,7 @@ if __name__ == '__main__':
         results['psnr'].append(valing_results['psnr'])
         results['ssim'].append(valing_results['ssim'])
     
+    
         if epoch % 10 == 0 and epoch != 0:
             out_path = 'statistics/'
             data_frame = pd.DataFrame(

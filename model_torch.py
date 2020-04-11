@@ -2,7 +2,6 @@ import math
 import torch
 from torch import nn
 
-
 class Generator(nn.Module):
     def __init__(self, scale_factor):
         upsample_block_num = int(math.log(scale_factor, 2))

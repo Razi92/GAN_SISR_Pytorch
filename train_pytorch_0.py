@@ -22,6 +22,7 @@ parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],
 parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
 
 
+
 if __name__ == '__main__':
     opt = parser.parse_args()
     

@@ -15,8 +15,6 @@ import pytorch_ssim
 from loss import GeneratorLoss
 from model import Generator, Discriminator
 
-
-
 parser = argparse.ArgumentParser(description='Train Super Resolution Models')
 #? parser.add_argument('--crop_size', default=88, type=int, help='training images crop size')
 #? parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],

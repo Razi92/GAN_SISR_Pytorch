@@ -2,7 +2,6 @@ import argparse
 import os
 from math import log10
 
-
 import pandas as pd
 import torch.optim as optim
 import torch.utils.data
@@ -21,8 +20,6 @@ parser.add_argument('--crop_size', default=88, type=int, help='training images c
 parser.add_argument('--upscale_factor', default=4, type=int, choices=[2, 4, 8],
                     help='super resolution upscale factor')
 parser.add_argument('--num_epochs', default=100, type=int, help='train epoch number')
-
-
 
 
 if __name__ == '__main__':
